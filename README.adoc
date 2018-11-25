@@ -1,0 +1,49 @@
+= Asciidoctor Emoji Extension :rocket:
+:uri-asciidoctorjs: https://github.com/asciidoctor/asciidoctor.js
+:uri-twemoji: https://blog.twitter.com/developer/en_us/a/2014/open-sourcing-twitter-emoji-for-everyone.html
+
+Extension for {uri-asciidoctorjs}[Asciidoctor.js] to convert `emoji:heart[]` into :heart: !
+
+== Usage
+
+Use `emoji:` followed by the name of your emoji (and don't forget the square brackets). For instance `wink`:
+
+```adoc
+emoji:wink[]
+```
+
+Additionally you can configure the size of an `emoji`.
+By default, the size is 24px but you can use one of the following:
+
+* `1x` (17px)
+* `lg` (24px)
+* `2x` (34px)
+* `3x` (50px)
+* `4x` (68px)
+* `5x` (85px)
+
+If you want a really big `bear`, use:
+
+```adoc
+emoji:bear[5x]
+```
+
+You can also specify a size in pixel:
+
+```adoc
+emoji:tada[42px]
+```
+
+== How ?
+
+This extension is using {uri-twemoji}[Twemoji from Twitter].
+The `emoji` inline macro is converted into an `<image>` that points to a remote SVG:
+
+
+```adoc
+emoji:beetle[]
+```
+
+```html
+<img class="emoji" draggable="false" height="24px" width="24px" src="https://twemoji.maxcdn.com/2/svg/1f41e.svg" />
+```
