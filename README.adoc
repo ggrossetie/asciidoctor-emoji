@@ -1,8 +1,8 @@
-= Asciidoctor Emoji Extension :rocket:
+= :rocket: Asciidoctor Emoji Extension
 :uri-asciidoctorjs: https://github.com/asciidoctor/asciidoctor.js
 :uri-twemoji: https://blog.twitter.com/developer/en_us/a/2014/open-sourcing-twitter-emoji-for-everyone.html
 
-Extension for {uri-asciidoctorjs}[Asciidoctor.js] to convert `emoji:heart[]` into :heart: !
+An extension for {uri-asciidoctorjs}[Asciidoctor.js] that turns `emoji:heart[]` into :heart: !
 
 == Usage
 
@@ -22,13 +22,13 @@ By default, the size is 24px but you can use one of the following:
 * `4x` (68px)
 * `5x` (85px)
 
-If you want a really big `bear`, use:
+If you want a really big :bear:, use:
 
 ```adoc
 emoji:bear[5x]
 ```
 
-You can also specify a size in pixel:
+You can also specify a size in pixel :tada:
 
 ```adoc
 emoji:tada[42px]
@@ -47,3 +47,6 @@ emoji:beetle[]
 ```html
 <img class="emoji" draggable="false" height="24px" width="24px" src="https://twemoji.maxcdn.com/2/svg/1f41e.svg" />
 ```
+
+:beetle:
+
