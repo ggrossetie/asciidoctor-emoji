@@ -1661,4 +1661,4 @@ module.exports = {
   'copyright': 'a9',
   'registered_sign': 'ae',
   'shibuya': 'e50a'
-};
+}
