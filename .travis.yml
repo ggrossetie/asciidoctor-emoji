@@ -19,9 +19,9 @@ jobs:
   include:
   - stage: release
     if: |
-      repo = 'mogztter/asciidoctor-emoji' AND \
+      repo = 'Mogztter/asciidoctor-emoji' AND \
       tag IS present
-    script: ./scripts/package.sh
+    script: ./tasks/package.sh
     deploy:
     - provider: npm
       skip_cleanup: true
