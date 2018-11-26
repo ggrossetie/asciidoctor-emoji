@@ -3,6 +3,76 @@
 :uri-twemoji: https://blog.twitter.com/developer/en_us/a/2014/open-sourcing-twitter-emoji-for-everyone.html
 
 An extension for {uri-asciidoctorjs}[Asciidoctor.js] that turns `emoji:heart[]` into :heart: !
+ifdef::env-github[]
+image:https://img.shields.io/travis/mogztter/asciidoctor-emoji/master.svg[Travis build status, link=https://travis-ci.org/mogztter/asciidoctor-emoji]
+endif::[]
+
+An extension for {uri-asciidoctorjs}[Asciidoctor.js] that turns `emoji:heart[]` into :heart: !
+
+== Install
+
+=== Node.js
+
+Install the dependencies::
+
+ $ npm install asciidoctor.js asciidoctor-emoji
+
+Create a file with following content and run it::
++
+[source,javascript]
+[subs="verbatim,attributes"]
+.emoji.js
+....
+const asciidoctor = require('asciidoctor.js')()
+const emoji = require('asciidoctor-emoji')
+
+const input = 'I emoji:heart[] Asciidoctor.js!'
+
+emoji.register(asciidoctor.Extensions)
+console.log(asciidoctor.convert(input)) // <1>
+
+const registry = asciidoctor.Extensions.create()
+emoji.register(registry)
+console.log(asciidoctor.convert(input, {'extension_registry': registry})) // <2>
+....
+<1> Register the extension in the global registry
+<2> Register the extension in a dedicated registry
+
+=== Browser
+
+Install the dependencies::
+
+ $ npm install asciidoctor.js asciidoctor-emoji
+
+Create a file with following content and open it in your browser::
++
+[source,html]
+[subs="verbatim,attributes"]
+.emoji.html
+....
+<html>
+  <head>
+    <script src="node_modules/asciidoctor.js/dist/browser/asciidoctor.js"></script>
+    <script src="node_modules/asciidoctor-emoji/dist/browser/asciidoctor-emoji.js"></script>
+  </head>
+  <body>
+    <div id="content></div>
+    <script>
+      var input = 'I emoji:heart[] Asciidoctor.js!'
+
+      var asciidoctor = Asciidoctor()
+      var emoji = AsciidoctorEmoji
+
+      const registry = asciidoctor.Extensions.create()
+      emoji.register(registry)
+      var result = asciidoctor.convert(asciidocContent, {'extension_registry': registry}))
+      document.getElementById('content').innerHTML = result
+    </script>
+  </body>
+</html>
+....
+<1> Register the extension in the global registry
+<2> Register the extension in a dedicated registry
 
 == Usage
 

@@ -2,16 +2,27 @@
   "name": "asciidoctor-emoji",
   "version": "0.1.0",
   "description": "Asciidoctor Emoji extension",
-  "main": "dist/node/asciidoctor-plantuml.js",
+  "main": "dist/node/asciidoctor-emoji.js",
   "files": [
-    "dist"
+    "dist",
+    "LICENSE",
+    "README.adoc"
   ],
   "scripts": {
-    "test": "mocha test/**.js"
+    "test": "mocha test/**.js",
+    "lint": "standard src/**.js test/**.js",
+    "clean": "rm -rf dist/*",
+    "dist": "npm run clean && npm run dist:browser && npm run dist:node",
+    "dist:browser": "mkdir -p dist/browser && browserify src/asciidoctor-emoji.js --standalone AsciidoctorEmoji -o dist/browser/asciidoctor-emoji.js",
+    "dist:node": "mkdir -p dist/node && cp src/**.js dist/node/",
+    "prepublishOnly": "node tasks/prepublish.js",
+    "postpublish": "node tasks/postpublish.js"
   },
   "devDependencies": {
     "asciidoctor.js": "^1.5.9",
+    "browserify": "^16.2.3",
     "chai": "^4.2.0",
+    "dirty-chai": "^2.0.1",
     "mocha": "^5.2.0",
     "standard": "^12.0.1"
   },
