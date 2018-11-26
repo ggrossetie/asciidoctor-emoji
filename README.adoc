@@ -56,7 +56,7 @@ Create a file with following content and open it in your browser::
     <script src="node_modules/asciidoctor-emoji/dist/browser/asciidoctor-emoji.js"></script>
   </head>
   <body>
-    <div id="content></div>
+    <div id="content"></div>
     <script>
       var input = 'I emoji:heart[] Asciidoctor.js!'
 
