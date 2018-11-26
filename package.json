@@ -44,6 +44,5 @@
   "bugs": {
     "url": "https://github.com/mogztter/asciidoctor-emoji/issues"
   },
-  "homepage": "https://github.com/mogztter/asciidoctor-emoji#readme",
-  "private": false
+  "homepage": "https://github.com/mogztter/asciidoctor-emoji#readme"
 }
