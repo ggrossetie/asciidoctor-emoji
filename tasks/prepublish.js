@@ -21,7 +21,7 @@ const markdownify = (asciidoc) => {
     .filter((line) => !(line.charAt(0) === ':' || line.charAt(0) === '[' || ~line.indexOf('::') || ~line.indexOf('>; ')))
     .map((line) => {
       if (line.charAt(0) === '=') {
-        line = line.replace(/^=+(?= \w)/, (m) => '#'.repeat(m.length));
+        line = line.replace(/^=+(?= [\w:])/, (m) => '#'.repeat(m.length));
       } else if (line.charAt(0) === '.') {
         line = '**' + line.substr(1) + '**';
       } else if (line.charAt(0) === '`' && line.startsWith('```')) {

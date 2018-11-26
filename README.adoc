@@ -18,10 +18,9 @@ Install the dependencies::
 
 Create a file with following content and run it::
 +
-[source,javascript]
-[subs="verbatim,attributes"]
 .emoji.js
-....
+[source,javascript]
+----
 const asciidoctor = require('asciidoctor.js')()
 const emoji = require('asciidoctor-emoji')
 
@@ -33,7 +32,7 @@ console.log(asciidoctor.convert(input)) // <1>
 const registry = asciidoctor.Extensions.create()
 emoji.register(registry)
 console.log(asciidoctor.convert(input, {'extension_registry': registry})) // <2>
-....
+----
 <1> Register the extension in the global registry
 <2> Register the extension in a dedicated registry
 
@@ -45,10 +44,9 @@ Install the dependencies::
 
 Create a file with following content and open it in your browser::
 +
-[source,html]
-[subs="verbatim,attributes"]
 .emoji.html
-....
+[source,html]
+----
 <html>
   <head>
     <script src="node_modules/asciidoctor.js/dist/browser/asciidoctor.js"></script>
@@ -69,7 +67,7 @@ Create a file with following content and open it in your browser::
     </script>
   </body>
 </html>
-....
+----
 <1> Register the extension in the global registry
 <2> Register the extension in a dedicated registry
 
