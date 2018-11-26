@@ -2,9 +2,8 @@
 :uri-asciidoctorjs: https://github.com/asciidoctor/asciidoctor.js
 :uri-twemoji: https://blog.twitter.com/developer/en_us/a/2014/open-sourcing-twitter-emoji-for-everyone.html
 
-An extension for {uri-asciidoctorjs}[Asciidoctor.js] that turns `emoji:heart[]` into :heart: !
 ifdef::env-github[]
-image:https://img.shields.io/travis/mogztter/asciidoctor-emoji/master.svg[Travis build status, link=https://travis-ci.org/mogztter/asciidoctor-emoji]
+image:https://img.shields.io/travis/Mogztter/asciidoctor-emoji/master.svg[Travis build status, link=https://travis-ci.org/Mogztter/asciidoctor-emoji]
 endif::[]
 
 An extension for {uri-asciidoctorjs}[Asciidoctor.js] that turns `emoji:heart[]` into :heart: !
@@ -14,7 +13,7 @@ An extension for {uri-asciidoctorjs}[Asciidoctor.js] that turns `emoji:heart[]` 
 === Node.js
 
 Install the dependencies::
-
++
  $ npm install asciidoctor.js asciidoctor-emoji
 
 Create a file with following content and run it::
@@ -26,7 +25,7 @@ Create a file with following content and run it::
 const asciidoctor = require('asciidoctor.js')()
 const emoji = require('asciidoctor-emoji')
 
-const input = 'I emoji:heart[] Asciidoctor.js!'
+const input = 'I emoji:heart[1x] Asciidoctor.js!'
 
 emoji.register(asciidoctor.Extensions)
 console.log(asciidoctor.convert(input)) // <1>
@@ -41,7 +40,7 @@ console.log(asciidoctor.convert(input, {'extension_registry': registry})) // <2>
 === Browser
 
 Install the dependencies::
-
++
  $ npm install asciidoctor.js asciidoctor-emoji
 
 Create a file with following content and open it in your browser::
@@ -56,16 +55,16 @@ Create a file with following content and open it in your browser::
     <script src="node_modules/asciidoctor-emoji/dist/browser/asciidoctor-emoji.js"></script>
   </head>
   <body>
-    <div id="content></div>
+    <div id="content"></div>
     <script>
-      var input = 'I emoji:heart[] Asciidoctor.js!'
+      var input = 'I emoji:heart[1x] Asciidoctor.js!'
 
       var asciidoctor = Asciidoctor()
       var emoji = AsciidoctorEmoji
 
       const registry = asciidoctor.Extensions.create()
       emoji.register(registry)
-      var result = asciidoctor.convert(asciidocContent, {'extension_registry': registry}))
+      var result = asciidoctor.convert(input, {'extension_registry': registry})
       document.getElementById('content').innerHTML = result
     </script>
   </body>
@@ -118,5 +117,4 @@ emoji:beetle[]
 <img class="emoji" draggable="false" height="24px" width="24px" src="https://twemoji.maxcdn.com/2/svg/1f41e.svg" />
 ```
 
-:beetle:
 
