@@ -12,15 +12,13 @@ An extension for {uri-asciidoctorjs}[Asciidoctor.js] that turns `emoji:heart[]` 
 
 === Node.js
 
-Install the dependencies::
-+
- $ npm install asciidoctor.js asciidoctor-emoji
+Install the dependencies:
 
-Create a file with following content and run it::
-+
-.emoji.js
-[source,javascript]
-----
+    $ npm install asciidoctor.js asciidoctor-emoji
+
+Create a file named `emoji.js` with following content and run it:
+
+```javascript
 const asciidoctor = require('asciidoctor.js')()
 const emoji = require('asciidoctor-emoji')
 
@@ -32,21 +30,19 @@ console.log(asciidoctor.convert(input)) // <1>
 const registry = asciidoctor.Extensions.create()
 emoji.register(registry)
 console.log(asciidoctor.convert(input, {'extension_registry': registry})) // <2>
-----
+```
 <1> Register the extension in the global registry
 <2> Register the extension in a dedicated registry
 
 === Browser
 
-Install the dependencies::
-+
- $ npm install asciidoctor.js asciidoctor-emoji
+Install the dependencies:
 
-Create a file with following content and open it in your browser::
-+
-.emoji.html
-[source,html]
-----
+    $ npm install asciidoctor.js asciidoctor-emoji
+
+Create a file named `emoji.html` with following content and open it in your browser:
+
+```html
 <html>
   <head>
     <script src="node_modules/asciidoctor.js/dist/browser/asciidoctor.js"></script>
@@ -67,7 +63,7 @@ Create a file with following content and open it in your browser::
     </script>
   </body>
 </html>
-----
+```
 <1> Register the extension in the global registry
 <2> Register the extension in a dedicated registry
 
