@@ -40,7 +40,7 @@ Install the dependencies:
 
     $ npm install asciidoctor.js asciidoctor-emoji
 
-Create a file named `emoji.html` with following content and open it in your browser:
+Create a file named `emoji.html` with the following content and open it in your browser:
 
 ```html
 <html>
