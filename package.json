@@ -5,9 +5,7 @@
   "main": "dist/node/asciidoctor-emoji.js",
   "browser": "dist/browser/asciidoctor-emoji.js",
   "files": [
-    "dist",
-    "LICENSE",
-    "README.adoc"
+    "dist"
   ],
   "scripts": {
     "test": "mocha test/**.js",
