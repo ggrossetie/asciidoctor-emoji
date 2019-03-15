@@ -3,6 +3,7 @@
   "version": "0.2.0",
   "description": "Asciidoctor Emoji extension",
   "main": "dist/node/asciidoctor-emoji.js",
+  "browser": "dist/browser/asciidoctor-emoji.js",
   "files": [
     "dist",
     "LICENSE",
