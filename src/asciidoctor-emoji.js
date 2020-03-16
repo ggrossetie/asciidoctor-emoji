@@ -6,7 +6,7 @@ function emojiInlineMacro () {
   self.positionalAttributes('size')
 
   const defaultSize = '24px'
-  const sizeMap = { '1x': '17px', 'lg': defaultSize, '2x': '34px', '3x': '50px', '4x': '68px', '5x': '85px' }
+  const sizeMap = { '1x': '17px', lg: defaultSize, '2x': '34px', '3x': '50px', '4x': '68px', '5x': '85px' }
 
   self.process(function (parent, target, attrs) {
     const sizeAttr = attrs.size

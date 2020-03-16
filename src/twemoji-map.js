@@ -1,4 +1,5 @@
 // https://github.com/jollygoodcode/twemoji/blob/3476e2700600ef2c89ffa34313b11b91e5f9baba/lib/twemoji/data/emoji-unicode.yml
+/* eslint-disable quote-props */
 module.exports = {
   'mahjong': '1f004',
   'black_joker': '1f0cf',
