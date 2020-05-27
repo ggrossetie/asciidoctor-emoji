@@ -1,6 +1,6 @@
 {
   "name": "asciidoctor-emoji",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Asciidoctor Emoji extension",
   "main": "dist/node/asciidoctor-emoji.js",
   "browser": "dist/browser/asciidoctor-emoji.js",
