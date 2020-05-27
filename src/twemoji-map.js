@@ -1467,7 +1467,7 @@ module.exports = {
   'arrow_lower_left': '2199',
   'leftwards_arrow_with_hook': '21a9',
   'arrow_right_hook': '21aa',
-  'hash': '23 - 20e3',
+  'hash': '23-20e3',
   'watch': '231a',
   'hourglass': '231b',
   'keyboard': '2328',
