@@ -23,7 +23,7 @@
     "chai": "^4.2.0",
     "dirty-chai": "^2.0.1",
     "mocha": "^8.0.1",
-    "standard": "^14.3.3"
+    "standard": "^15.0.0"
   },
   "peerDependencies": {
     "asciidoctor.js": "1.5.9"
