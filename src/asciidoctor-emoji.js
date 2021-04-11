@@ -20,8 +20,8 @@ function emojiInlineMacro () {
     }
     const emojiUnicode = twemojiMap[target]
     if (emojiUnicode) {
-      image_src = parent.getImageUri(`https://twemoji.maxcdn.com/2/svg/${emojiUnicode}.svg`)
-      return `<img class="emoji" draggable="false" height="${size}" width="${size}" src="${image_src}" />`
+      const imageSrc = parent.getImageUri(`https://twemoji.maxcdn.com/2/svg/${emojiUnicode}.svg`)
+      return `<img class="emoji" draggable="false" height="${size}" width="${size}" src="${imageSrc}" />`
     }
     console.warn(`Skipping emoji inline macro. ${target} not found`)
     return `[emoji ${target} not found]`
