@@ -1,17 +1,13 @@
-= :rocket: Asciidoctor Emoji Extension
-:uri-asciidoctorjs: https://github.com/asciidoctor/asciidoctor.js
-:uri-twemoji: https://blog.twitter.com/developer/en_us/a/2014/open-sourcing-twitter-emoji-for-everyone.html
+# :rocket: Asciidoctor Emoji Extension
 
-ifdef::env-github[]
-image:https://github.com/Mogztter/asciidoctor-emoji/actions/workflows/build.yml/badge.svg[Build status, link=https://github.com/Mogztter/asciidoctor-emoji/actions/workflows/build.yml]
-image:https://img.shields.io/npm/v/asciidoctor-emoji[npm version, link=https://www.npmjs.com/package/asciidoctor-emoji]
-endif::[]
+[![Build](https://github.com/Mogztter/asciidoctor-emoji/actions/workflows/build.yml/badge.svg)](https://github.com/Mogztter/asciidoctor-emoji/actions/workflows/build.yml)
+[![npm version](https://img.shields.io/npm/v/asciidoctor-emoji)](https://www.npmjs.com/package/asciidoctor-emoji)
 
-An extension for {uri-asciidoctorjs}[Asciidoctor.js] that turns `emoji:heart[]` into :heart: !
+An extension for [Asciidoctor.js](https://github.com/asciidoctor/asciidoctor.js) that turns `emoji:heart[]` into :heart: !
 
-== Install
+## Install
 
-=== Node.js
+### Node.js
 
 Install the dependencies:
 
@@ -32,10 +28,10 @@ const registry = asciidoctor.Extensions.create()
 emoji.register(registry)
 console.log(asciidoctor.convert(input, {'extension_registry': registry})) // <2>
 ```
-<1> Register the extension in the global registry
+<1> Register the extension in the global registry   
 <2> Register the extension in a dedicated registry
 
-=== Browser
+### Browser
 
 Install the dependencies:
 
@@ -65,10 +61,10 @@ Create a file named `emoji.html` with the following content and open it in your 
   </body>
 </html>
 ```
-<1> Register the extension in the global registry
+<1> Register the extension in the global registry   
 <2> Register the extension in a dedicated registry
 
-== Usage
+## Usage
 
 Use `emoji:` followed by the name of your emoji (and don't forget the square brackets). For instance `wink`:
 
@@ -98,9 +94,9 @@ You can also specify a size in pixel :tada:
 emoji:tada[42px]
 ```
 
-== How ?
+## How ?
 
-This extension is using {uri-twemoji}[Twemoji from Twitter].
+This extension is using [Twemoji from Twitter](https://blog.twitter.com/developer/en_us/a/2014/open-sourcing-twitter-emoji-for-everyone.html).
 The `emoji` inline macro is converted into an `<image>` that points to a remote SVG:
 
 
