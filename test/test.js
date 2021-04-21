@@ -72,8 +72,7 @@ describe('Conversion', () => {
     const input = 'emoji:black_circle[]'
     const registry = asciidoctor.Extensions.create()
     asciidoctorEmoji.register(registry)
-    const html = asciidoctor.convert(input, {extension_registry: registry , attributes: ['data-uri', 'allow-uri-read']})
-    expect(html).to.contain('<img class="emoji" draggable="false" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PGNpcmNsZSBmaWxsPSIjMzEzNzNEIiBjeD0iMTgiIGN5PSIxOCIgcj0iMTgiLz48L3N2Zz4=" width="24px" height="24px">')
+    const html = asciidoctor.convert(input, { extension_registry: registry, safe: 'safe', attributes: { 'data-uri': '', 'allow-uri-read': '' } })
+    expect(html).to.contain('<img class="emoji" draggable="false" height="24px" width="24px" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PGNpcmNsZSBmaWxsPSIjMzEzNzNEIiBjeD0iMTgiIGN5PSIxOCIgcj0iMTgiLz48L3N2Zz4=" />')
   })
-
 })
