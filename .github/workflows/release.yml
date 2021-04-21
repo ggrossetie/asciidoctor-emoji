@@ -36,6 +36,8 @@ jobs:
       - name: Package
         run: ./scripts/package.sh
       - name: Publish
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: ./scripts/publish.sh
       # create the GitHub release
       - name: Create release
