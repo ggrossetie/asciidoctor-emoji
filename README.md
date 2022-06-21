@@ -11,12 +11,12 @@ An extension for [Asciidoctor.js](https://github.com/asciidoctor/asciidoctor.js)
 
 Install the dependencies:
 
-    $ npm install asciidoctor.js asciidoctor-emoji
+    $ npm i @asciidoctor/core asciidoctor-emoji
 
 Create a file named `emoji.js` with following content and run it:
 
 ```javascript
-const asciidoctor = require('asciidoctor.js')()
+const asciidoctor = require('@asciidoctor/core')()
 const emoji = require('asciidoctor-emoji')
 
 const input = 'I emoji:heart[1x] Asciidoctor.js!'
@@ -35,14 +35,14 @@ console.log(asciidoctor.convert(input, {'extension_registry': registry})) // <2>
 
 Install the dependencies:
 
-    $ npm install asciidoctor.js asciidoctor-emoji
+    $ npm i @asciidoctor/core asciidoctor-emoji
 
 Create a file named `emoji.html` with the following content and open it in your browser:
 
 ```html
 <html>
   <head>
-    <script src="node_modules/asciidoctor.js/dist/browser/asciidoctor.js"></script>
+    <script src="node_modules/@asciidoctor/core/dist/browser/asciidoctor.js"></script>
     <script src="node_modules/asciidoctor-emoji/dist/browser/asciidoctor-emoji.js"></script>
   </head>
   <body>
@@ -105,7 +105,8 @@ emoji:beetle[]
 ```
 
 ```html
-<img class="emoji" draggable="false" height="24px" width="24px" src="https://twemoji.maxcdn.com/2/svg/1f41e.svg" />
+<span class="emoji"><img src="https://twemoji.maxcdn.com/2/svg/1f41e.svg" alt="beetle" width="24px" height="24px"></span>
 ```
 
+<span class="emoji"><img src="https://twemoji.maxcdn.com/2/svg/1f41e.svg" alt="beetle" width="24px" height="24px"></span>
 
