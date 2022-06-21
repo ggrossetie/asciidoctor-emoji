@@ -6,7 +6,7 @@ const dirtyChai = require('dirty-chai')
 chai.use(dirtyChai)
 
 const asciidoctorEmoji = require('../src/asciidoctor-emoji.js')
-const asciidoctor = require('asciidoctor.js')()
+const asciidoctor = require('@asciidoctor/core')()
 
 describe('Registration', () => {
   it('should register the extension', () => {

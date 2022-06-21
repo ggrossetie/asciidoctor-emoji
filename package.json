@@ -17,17 +17,17 @@
     "prepublishOnly": "npm run dist"
   },
   "devDependencies": {
-    "asciidoctor.js": "^1.5.9",
-    "browserify": "^17.0.0",
-    "chai": "^4.2.0",
-    "dirty-chai": "^2.0.1",
-    "libnpmpublish": "^4.0.0",
-    "mocha": "^9.0.0",
-    "pacote": "^12.0.2",
-    "standard": "^16.0.1"
+    "@asciidoctor/core": "~2.2",
+    "browserify": "~17.0",
+    "chai": "~4.3",
+    "dirty-chai": "~2.0",
+    "libnpmpublish": "~6.0",
+    "mocha": "~10.0",
+    "pacote": "~13.6",
+    "standard": "~17.0"
   },
   "peerDependencies": {
-    "asciidoctor.js": "1.5.9"
+    "@asciidoctor/core": "~2.2"
   },
   "repository": {
     "type": "git",
