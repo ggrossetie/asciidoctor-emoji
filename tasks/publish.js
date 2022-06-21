@@ -1,6 +1,5 @@
 'use strict'
 const path = require('path')
-const fs = require('fs')
 const pacote = require('pacote') // see: http://npm.im/pacote
 const { publish: npmPublish } = require('libnpmpublish')
 
