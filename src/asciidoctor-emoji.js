@@ -20,11 +20,18 @@ function emojiInlineMacro () {
     }
     const emojiUnicode = twemojiMap[target]
     if (emojiUnicode) {
-      const imageSrc = parent.getImageUri(`https://twemoji.maxcdn.com/2/svg/${emojiUnicode}.svg`)
-      return `<img class="emoji" draggable="false" height="${size}" width="${size}" src="${imageSrc}" />`
+      return self.createInline(parent, 'image', '', {
+        target: `https://twemoji.maxcdn.com/2/svg/${emojiUnicode}.svg`,
+        type: 'emoji',
+        attributes: {
+          alt: target,
+          height: size,
+          width: size
+        }
+      })
     }
     console.warn(`Skipping emoji inline macro. ${target} not found`)
-    return `[emoji ${target} not found]`
+    return self.createInline(parent, 'quoted', `[emoji ${target} not found]`, attrs)
   })
 }
 
