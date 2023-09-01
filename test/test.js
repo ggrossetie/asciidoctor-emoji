@@ -37,7 +37,7 @@ describe('Conversion', () => {
       const registry = asciidoctor.Extensions.create()
       asciidoctorEmoji.register(registry)
       const html = asciidoctor.convert(input, { extension_registry: registry })
-      expect(html).to.contain('<span class="emoji"><img src="https://twemoji.maxcdn.com/2/svg/1f604.svg" alt="smile" width="24px" height="24px"></span>')
+      expect(html).to.contain('<span class="emoji"><img src="https://cdn.jsdelivr.net/npm/twemoji@latest/2/svg/1f604.svg" alt="smile" width="24px" height="24px"></span>')
     })
     it('should return an error message if the emoji does not exist', () => {
       const input = 'emoji:ooops[]'
@@ -52,21 +52,21 @@ describe('Conversion', () => {
     const registry = asciidoctor.Extensions.create()
     asciidoctorEmoji.register(registry)
     const html = asciidoctor.convert(input, { extension_registry: registry })
-    expect(html).to.contain('<span class="emoji"><img src="https://twemoji.maxcdn.com/2/svg/1f385-1f3ff.svg" alt="santa-skin-tone-6" width="34px" height="34px"></span>')
+    expect(html).to.contain('<span class="emoji"><img src="https://cdn.jsdelivr.net/npm/twemoji@latest/2/svg/1f385-1f3ff.svg" alt="santa-skin-tone-6" width="34px" height="34px"></span>')
   })
   it('should convert an existing emoji into an image with the size 4x (68px)', () => {
     const input = 'emoji:beetle[4x]'
     const registry = asciidoctor.Extensions.create()
     asciidoctorEmoji.register(registry)
     const html = asciidoctor.convert(input, { extension_registry: registry })
-    expect(html).to.contain('<span class="emoji"><img src="https://twemoji.maxcdn.com/2/svg/1f41e.svg" alt="beetle" width="68px" height="68px"></span>')
+    expect(html).to.contain('<span class="emoji"><img src="https://cdn.jsdelivr.net/npm/twemoji@latest/2/svg/1f41e.svg" alt="beetle" width="68px" height="68px"></span>')
   })
   it('should convert an existing emoji into an image with the size in pixel (42px)', () => {
     const input = 'emoji:penguin[42px]'
     const registry = asciidoctor.Extensions.create()
     asciidoctorEmoji.register(registry)
     const html = asciidoctor.convert(input, { extension_registry: registry })
-    expect(html).to.contain('<span class="emoji"><img src="https://twemoji.maxcdn.com/2/svg/1f427.svg" alt="penguin" width="42px" height="42px"></span>')
+    expect(html).to.contain('<span class="emoji"><img src="https://cdn.jsdelivr.net/npm/twemoji@latest/2/svg/1f427.svg" alt="penguin" width="42px" height="42px"></span>')
   })
   it('should convert an existing emoji into an inline image', () => {
     const input = 'emoji:black_circle[]'

@@ -21,7 +21,7 @@ function emojiInlineMacro () {
     const emojiUnicode = twemojiMap[target]
     if (emojiUnicode) {
       return self.createInline(parent, 'image', '', {
-        target: `https://twemoji.maxcdn.com/2/svg/${emojiUnicode}.svg`,
+        target: `https://cdn.jsdelivr.net/npm/twemoji@latest/2/svg/${emojiUnicode}.svg`,
         type: 'emoji',
         attributes: {
           alt: target,
