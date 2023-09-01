@@ -23,7 +23,7 @@
     "dirty-chai": "~2.0",
     "libnpmpublish": "^9.0.0",
     "mocha": "^10.2.0",
-    "pacote": "~13.6",
+    "pacote": "^17.0.4",
     "standard": "~17.0"
   },
   "peerDependencies": {
