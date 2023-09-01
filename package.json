@@ -17,7 +17,7 @@
     "prepublishOnly": "npm run dist"
   },
   "devDependencies": {
-    "@asciidoctor/core": "~2.2",
+    "@asciidoctor/core": "^3.0.2",
     "browserify": "~17.0",
     "chai": "~4.3",
     "dirty-chai": "~2.0",
@@ -27,7 +27,7 @@
     "standard": "~17.0"
   },
   "peerDependencies": {
-    "@asciidoctor/core": "~2.2"
+    "@asciidoctor/core": "^3.0.2"
   },
   "repository": {
     "type": "git",
