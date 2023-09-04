@@ -17,17 +17,17 @@
     "prepublishOnly": "npm run dist"
   },
   "devDependencies": {
-    "@asciidoctor/core": "~2.2",
+    "@asciidoctor/core": ">=2.2 <4.0",
     "browserify": "~17.0",
     "chai": "~4.3",
     "dirty-chai": "~2.0",
     "libnpmpublish": "~6.0",
-    "mocha": "~10.0",
+    "mocha": "~10.2",
     "pacote": "~13.6",
-    "standard": "~17.0"
+    "standard": "~17.1"
   },
   "peerDependencies": {
-    "@asciidoctor/core": "~2.2"
+    "@asciidoctor/core": ">=2.2 <4.0"
   },
   "repository": {
     "type": "git",
