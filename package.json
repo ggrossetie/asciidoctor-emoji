@@ -22,11 +22,13 @@
     "lint": "biome check .",
     "format": "biome format --write .",
     "build": "rollup -c",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "update:twemoji-map": "node tasks/generate-twemoji-map.js"
   },
   "devDependencies": {
     "@asciidoctor/core": "^4.0",
     "@biomejs/biome": "^2.5.5",
+    "emoji-datasource-twitter": "^16.0.0",
     "rollup": "^4.62.2"
   },
   "peerDependencies": {

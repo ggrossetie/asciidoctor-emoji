@@ -106,7 +106,7 @@ emoji:tada[42px]
 
 ## How ?
 
-This extension is using [Twemoji from Twitter](https://blog.twitter.com/developer/en_us/a/2014/open-sourcing-twitter-emoji-for-everyone.html).
+This extension is using [Twemoji](https://github.com/jdecked/twemoji), the actively maintained continuation of Twitter's original emoji set.
 The `emoji` inline macro is converted into an `<image>` that points to a remote SVG:
 
 
@@ -115,8 +115,8 @@ emoji:beetle[]
 ```
 
 ```html
-<span class="emoji"><img src="https://twemoji.maxcdn.com/2/svg/1f41e.svg" alt="beetle" width="24px" height="24px"></span>
+<span class="emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1fab2.svg" alt="beetle" width="24px" height="24px"></span>
 ```
 
-<span class="emoji"><img src="https://twemoji.maxcdn.com/2/svg/1f41e.svg" alt="beetle" width="24px" height="24px"></span>
+<span class="emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1fab2.svg" alt="beetle" width="24px" height="24px"></span>
 
