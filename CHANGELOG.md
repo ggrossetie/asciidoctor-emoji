@@ -25,6 +25,7 @@
 - Log unresolved emoji through Asciidoctor's own logger (respecting a caller-supplied `logger` option and including the source line when the document is processed with `sourcemap: true`) instead of `console.warn`
 - Document `emoji-pattern` with a side-by-side rendering of `emoji:grinning[]` across the Twitter, Facebook, and Google emoji sets, plus an animated Noto GIF via [emoji-cdn](https://github.com/oddmario/emoji-cdn)'s `animated-noto-color-emoji` style, to show how much a single attribute changes the artwork
 - Swap the `beetle` example in the "How ?" section for `ladybug`
+- Rework the "How ?" section into a short overview of both rendering mechanisms (image via `emoji-pattern`, text via `emojis: font`), linking out to their dedicated sections instead of only describing the default Twemoji image behavior
 
 ## v0.5.0 (2023-09-04)
 

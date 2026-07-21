@@ -220,9 +220,20 @@ standalone document (it has nowhere to inject a `<link>` in an embedded fragment
 
 ## How ?
 
-This extension is using [Twemoji](https://github.com/discord/twemoji), Discord's actively maintained fork of Twitter's original emoji set.
-The `emoji` inline macro is converted into an `<image>` that points to a remote SVG, tagged with the `emoji` role so it can be targeted with CSS:
+Every emoji short name (e.g. `ladybug`) is mapped to its Unicode codepoint(s) via a table generated
+from `emoji-datasource` (see `src/twemoji-map.js`). What the `emoji` inline macro does with that
+codepoint then depends on how the extension is configured:
 
+* **Image** (the default) — the codepoint is substituted into a URL template and the macro is
+  converted into an `<image>`, tagged with the `emoji` role. Out of the box that URL points at
+  [Twemoji](https://github.com/discord/twemoji), Discord's actively maintained fork of Twitter's
+  original emoji set, but `emoji-pattern` can point it at any other CDN or emoji set — see
+  [Configuring the image source](#configuring-the-image-source).
+* **Text** (`emojis: font`) — the codepoint is turned back into the actual Unicode character(s) and
+  wrapped in a `<span class="emoji">`, relying on the reader's own font to draw it instead of
+  fetching an image — see [Rendering emoji as text with a font](#rendering-emoji-as-text-with-a-font).
+
+For example, with the default image rendering:
 
 ```adoc
 emoji:ladybug[]
