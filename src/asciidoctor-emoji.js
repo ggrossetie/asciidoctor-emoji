@@ -23,7 +23,7 @@ function emojiInlineMacro() {
     const emojiUnicode = twemojiMap[target]
     if (emojiUnicode) {
       return this.createInline(parent, 'image', '', {
-        target: `https://cdn.jsdelivr.net/npm/twemoji@latest/2/svg/${emojiUnicode}.svg`,
+        target: `https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/${emojiUnicode}.svg`,
         type: 'emoji',
         attributes: {
           alt: target,

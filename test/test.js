@@ -34,7 +34,7 @@ describe('Conversion', () => {
       const html = await convert(input, { extension_registry: registry })
       assert.ok(
         html.includes(
-          '<span class="emoji"><img src="https://cdn.jsdelivr.net/npm/twemoji@latest/2/svg/1f604.svg" alt="smile" width="24px" height="24px"></span>',
+          '<span class="emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1f604.svg" alt="smile" width="24px" height="24px"></span>',
         ),
       )
     })
@@ -53,7 +53,7 @@ describe('Conversion', () => {
     const html = await convert(input, { extension_registry: registry })
     assert.ok(
       html.includes(
-        '<span class="emoji"><img src="https://cdn.jsdelivr.net/npm/twemoji@latest/2/svg/1f385-1f3ff.svg" alt="santa-skin-tone-6" width="34px" height="34px"></span>',
+        '<span class="emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1f385-1f3ff.svg" alt="santa-skin-tone-6" width="34px" height="34px"></span>',
       ),
     )
   })
@@ -64,7 +64,7 @@ describe('Conversion', () => {
     const html = await convert(input, { extension_registry: registry })
     assert.ok(
       html.includes(
-        '<span class="emoji"><img src="https://cdn.jsdelivr.net/npm/twemoji@latest/2/svg/1f41e.svg" alt="beetle" width="68px" height="68px"></span>',
+        '<span class="emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1fab2.svg" alt="beetle" width="68px" height="68px"></span>',
       ),
     )
   })
@@ -75,9 +75,30 @@ describe('Conversion', () => {
     const html = await convert(input, { extension_registry: registry })
     assert.ok(
       html.includes(
-        '<span class="emoji"><img src="https://cdn.jsdelivr.net/npm/twemoji@latest/2/svg/1f427.svg" alt="penguin" width="42px" height="42px"></span>',
+        '<span class="emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1f427.svg" alt="penguin" width="42px" height="42px"></span>',
       ),
     )
+  })
+  it('should convert an emoji that was missing from the previous, stale twemoji-map.js', async () => {
+    const input = 'emoji:avocado[]'
+    const registry = Extensions.create()
+    register(registry)
+    const html = await convert(input, { extension_registry: registry })
+    assert.ok(
+      html.includes(
+        '<span class="emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1f951.svg" alt="avocado" width="24px" height="24px"></span>',
+      ),
+    )
+  })
+  it('should convert an emoji alias to the same image as its primary short name', async () => {
+    const registry = Extensions.create()
+    register(registry)
+    const [primary, alias] = await Promise.all([
+      convert('emoji:+1[]', { extension_registry: registry }),
+      convert('emoji:thumbsup[]', { extension_registry: registry }),
+    ])
+    assert.ok(primary.includes('src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1f44d.svg"'))
+    assert.ok(alias.includes('src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1f44d.svg"'))
   })
   it('should convert an existing emoji into an inline image', async () => {
     const input = 'emoji:black_circle[]'
