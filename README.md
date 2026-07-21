@@ -104,10 +104,22 @@ You can also specify a size in pixel :tada:
 emoji:tada[42px]
 ```
 
+If the emoji does not exist, a warning is logged (through Asciidoctor's own logger, including
+the source line when the document is processed with `sourcemap: true`) and the macro is left
+in place, marked with the `unresolved` role so it can be styled or spotted in the output:
+
+```adoc
+emoji:not-an-emoji[]
+```
+
+```html
+<span class="emoji unresolved">emoji:not-an-emoji[] unresolved</span>
+```
+
 ## How ?
 
 This extension is using [Twemoji](https://github.com/discord/twemoji), Discord's actively maintained fork of Twitter's original emoji set.
-The `emoji` inline macro is converted into an `<image>` that points to a remote SVG:
+The `emoji` inline macro is converted into an `<image>` that points to a remote SVG, tagged with the `emoji` role so it can be targeted with CSS:
 
 
 ```adoc
@@ -115,8 +127,8 @@ emoji:beetle[]
 ```
 
 ```html
-<span class="emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1fab2.svg" alt="beetle" width="24px" height="24px"></span>
+<span class="image emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1fab2.svg" alt="beetle" width="24px" height="24px"></span>
 ```
 
-<span class="emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1fab2.svg" alt="beetle" width="24px" height="24px"></span>
+<span class="image emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1fab2.svg" alt="beetle" width="24px" height="24px"></span>
 

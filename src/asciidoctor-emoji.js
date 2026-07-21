@@ -24,16 +24,27 @@ function emojiInlineMacro() {
     if (emojiUnicode) {
       return this.createInline(parent, 'image', '', {
         target: `https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/${emojiUnicode}.svg`,
-        type: 'emoji',
         attributes: {
           alt: target,
           height: size,
           width: size,
+          role: 'emoji',
         },
       })
     }
-    console.warn(`Skipping emoji inline macro. ${target} not found`)
-    return this.createInline(parent, 'quoted', `[emoji ${target} not found]`, attrs)
+    const doc = parent.getDocument()
+    // Workaround: in @asciidoctor/core 4.0.4, doc.getLogger() ignores a per-call `logger` option
+    // passed to convert()/load() once outside load()'s internal async-local-storage scope (i.e.
+    // during doc.convert(), where this macro runs), while the `logger` property getter respects
+    // it correctly. Use `doc.logger` until that inconsistency is fixed upstream.
+    doc.logger.warn(
+      doc.messageWithContext(`skipping emoji inline macro, ${target} not found`, {
+        source_location: parent.getSourceLocation?.() ?? null,
+      }),
+    )
+    return this.createInline(parent, 'quoted', `emoji:${target}[] unresolved`, {
+      attributes: { role: 'emoji unresolved' },
+    })
   })
 }
 
