@@ -10,6 +10,7 @@ describe('Registration', () => {
     register(registry)
     assert.equal(registry.hasInlineMacros(), true)
     assert.ok(registry.registeredForInlineMacro('emoji'))
+    assert.equal(registry.hasDocinfoProcessors(), true)
   })
 })
 
@@ -189,6 +190,89 @@ describe('Conversion', () => {
         '<span class="image emoji"><img src="https://emoji-cdn.mqrio.dev/%F0%9F%87%AB%F0%9F%87%B7?style=google" alt="flag-fr" width="24px" height="24px"></span>',
       ),
     )
+  })
+  it('should render the emoji as a unicode character when the emojis attribute is font', async () => {
+    const input = 'emoji:smile[]'
+    const registry = Extensions.create()
+    register(registry)
+    const html = await convert(input, {
+      extension_registry: registry,
+      attributes: { emojis: 'font' },
+    })
+    assert.ok(html.includes('<span class="emoji" title="smile" style="font-size:24px">😄</span>'))
+  })
+  it('should honor the size attribute as a font-size when the emojis attribute is font', async () => {
+    const input = 'emoji:tada[2x]'
+    const registry = Extensions.create()
+    register(registry)
+    const html = await convert(input, {
+      extension_registry: registry,
+      attributes: { emojis: 'font' },
+    })
+    assert.ok(html.includes('<span class="emoji" title="tada" style="font-size:34px">🎉</span>'))
+  })
+  it('should render a multi-codepoint emoji as its unicode character(s) when the emojis attribute is font', async () => {
+    const input = 'emoji:flag-fr[]'
+    const registry = Extensions.create()
+    register(registry)
+    const html = await convert(input, {
+      extension_registry: registry,
+      attributes: { emojis: 'font' },
+    })
+    assert.ok(html.includes('<span class="emoji" title="flag-fr" style="font-size:24px">🇫🇷</span>'))
+  })
+  it('should render an emoji alias as its own name in the title attribute when the emojis attribute is font', async () => {
+    const input = 'emoji:+1[]'
+    const registry = Extensions.create()
+    register(registry)
+    const html = await convert(input, {
+      extension_registry: registry,
+      attributes: { emojis: 'font' },
+    })
+    assert.ok(html.includes('<span class="emoji" title="+1" style="font-size:24px">👍</span>'))
+  })
+  it('should still report an unresolved emoji as unresolved when the emojis attribute is font', async () => {
+    const input = 'emoji:ooops[]'
+    const registry = Extensions.create()
+    register(registry)
+    const html = await convert(input, {
+      extension_registry: registry,
+      attributes: { emojis: 'font' },
+    })
+    assert.ok(html.includes('<span class="emoji unresolved">emoji:ooops[] unresolved</span>'))
+  })
+  it('should inject the emoji-webfont stylesheet in the head when the emojis attribute is font', async () => {
+    const input = 'emoji:smile[]'
+    const registry = Extensions.create()
+    register(registry)
+    const html = await convert(input, {
+      extension_registry: registry,
+      standalone: true,
+      attributes: { emojis: 'font', 'emoji-webfont': 'https://example.org/emoji-font.css' },
+    })
+    assert.ok(html.includes('<link rel="stylesheet" href="https://example.org/emoji-font.css">'))
+  })
+  it('should not inject any stylesheet when emoji-webfont is not set', async () => {
+    const input = 'emoji:smile[]'
+    const registry = Extensions.create()
+    register(registry)
+    const html = await convert(input, {
+      extension_registry: registry,
+      standalone: true,
+      attributes: { emojis: 'font' },
+    })
+    assert.ok(!html.includes('emoji-font'))
+  })
+  it('should not inject the emoji-webfont stylesheet when the emojis attribute is not font', async () => {
+    const input = 'emoji:smile[]'
+    const registry = Extensions.create()
+    register(registry)
+    const html = await convert(input, {
+      extension_registry: registry,
+      standalone: true,
+      attributes: { 'emoji-webfont': 'https://example.org/emoji-font.css' },
+    })
+    assert.ok(!html.includes('example.org'))
   })
   it('should convert an existing emoji into an inline image', async () => {
     const input = 'emoji:black_circle[]'

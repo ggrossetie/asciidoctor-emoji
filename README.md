@@ -152,6 +152,48 @@ Other examples:
 :emoji-pattern: https://emoji-cdn.mqrio.dev/{emoji}?style=google
 ```
 
+## Rendering emoji as text with a font
+
+Instead of fetching an image, you can render the emoji as its actual Unicode character and let
+the font handle the display (e.g. a system emoji font, or a webfont like Noto Emoji/Twemoji
+Mozilla loaded via CSS) by setting the `emojis` document attribute to `font`:
+
+```adoc
+:emojis: font
+
+I emoji:heart[] Asciidoctor.js!
+```
+
+```html
+I <span class="emoji" title="heart" style="font-size:24px">❤</span> Asciidoctor.js!
+```
+
+The `size` argument (see above) is applied as a `font-size` instead of `width`/`height`. An
+unresolved emoji still logs a warning and renders the same `unresolved`-tagged placeholder
+regardless of the `emojis` attribute.
+
+By default, `emojis: font` relies on whatever emoji font is already available to the reader
+(the OS/browser's system emoji font). No webfont is bundled or loaded automatically, so there's
+no extra network request. If you want consistent rendering across platforms, point the
+`emoji-webfont` document attribute at a stylesheet (typically one that declares an `@font-face`,
+e.g. [Twemoji Mozilla](https://github.com/mozilla/twemoji-colr) or
+[Noto Color Emoji](https://fonts.google.com/noto/specimen/Noto+Color+Emoji)) and it is injected
+as a `<link>` in the document `<head>`:
+
+```adoc
+:emojis: font
+:emoji-webfont: https://example.org/twemoji-mozilla.css
+
+I emoji:heart[] Asciidoctor.js!
+```
+
+```html
+<link rel="stylesheet" href="https://example.org/twemoji-mozilla.css">
+```
+
+`emoji-webfont` only has an effect when `emojis` is set to `font`, and only when converting a
+standalone document (it has nowhere to inject a `<link>` in an embedded fragment).
+
 ## How ?
 
 This extension is using [Twemoji](https://github.com/discord/twemoji), Discord's actively maintained fork of Twitter's original emoji set.

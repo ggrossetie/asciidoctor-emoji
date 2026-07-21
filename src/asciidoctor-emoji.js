@@ -10,6 +10,11 @@ function codepointToChar(codepoint) {
     .join('')
 }
 
+const htmlEscapeMap = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }
+function escapeHtmlAttribute(str) {
+  return str.replace(/[&<>"]/g, (ch) => htmlEscapeMap[ch])
+}
+
 function emojiInlineMacro() {
   this.named('emoji')
   this.positionalAttributes('size')
@@ -34,6 +39,14 @@ function emojiInlineMacro() {
     const doc = parent.getDocument()
     const emojiUnicode = twemojiMap[target]
     if (emojiUnicode) {
+      if (doc.getAttribute('emojis') === 'font') {
+        const char = codepointToChar(emojiUnicode)
+        return this.createInline(
+          parent,
+          'quoted',
+          `<span class="emoji" title="${escapeHtmlAttribute(target)}" style="font-size:${size}">${char}</span>`,
+        )
+      }
       const pattern = doc.getAttribute('emoji-pattern', defaultPattern)
       const url = pattern
         .replaceAll('{codepoint}', emojiUnicode)
@@ -65,13 +78,24 @@ function emojiInlineMacro() {
   })
 }
 
+function emojiWebfontDocinfoProcessor() {
+  this.process((doc) => {
+    if (doc.getAttribute('emojis') !== 'font') return ''
+    const webfont = doc.getAttribute('emoji-webfont')
+    if (!webfont) return ''
+    return `<link rel="stylesheet" href="${escapeHtmlAttribute(webfont)}">`
+  })
+}
+
 export function register(registry) {
   if (typeof registry.register === 'function') {
     registry.register(function () {
       this.inlineMacro(emojiInlineMacro)
+      this.docinfoProcessor(emojiWebfontDocinfoProcessor)
     })
   } else if (typeof registry.block === 'function') {
     registry.inlineMacro(emojiInlineMacro)
+    registry.docinfoProcessor(emojiWebfontDocinfoProcessor)
   }
   return registry
 }
