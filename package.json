@@ -28,7 +28,7 @@
   "devDependencies": {
     "@asciidoctor/core": "^4.0",
     "@biomejs/biome": "^2.5.5",
-    "emoji-datasource-twitter": "^16.0.0",
+    "emoji-datasource": "^16.0.0",
     "rollup": "^4.62.2"
   },
   "peerDependencies": {
