@@ -1,37 +1,40 @@
 {
   "name": "asciidoctor-emoji",
   "version": "0.5.0",
-  "description": "Asciidoctor Emoji extension",
-  "main": "dist/node/asciidoctor-emoji.js",
-  "browser": "dist/browser/asciidoctor-emoji.js",
+  "description": "Asciidoctor Emoji Extension",
+  "type": "module",
+  "main": "./dist/asciidoctor-emoji.cjs",
+  "browser": "./dist/browser/asciidoctor-emoji.js",
+  "exports": {
+    "browser": "./dist/browser/asciidoctor-emoji.js",
+    "import": "./src/asciidoctor-emoji.js",
+    "require": "./dist/asciidoctor-emoji.cjs"
+  },
   "files": [
+    "src",
     "dist"
   ],
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
-    "test": "mocha test/**.js",
-    "lint": "standard src/**.js test/**.js",
-    "clean": "rm -rf dist/*",
-    "dist": "npm run clean && npm run dist:browser && npm run dist:node",
-    "dist:browser": "mkdir -p dist/browser && browserify src/asciidoctor-emoji.js --standalone AsciidoctorEmoji -o dist/browser/asciidoctor-emoji.js",
-    "dist:node": "mkdir -p dist/node && cp src/**.js dist/node/",
-    "prepublishOnly": "npm run dist"
+    "test": "node --test",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@asciidoctor/core": ">=2.2 <4.0",
-    "browserify": "~17.0",
-    "chai": "~4.3",
-    "dirty-chai": "~2.0",
-    "libnpmpublish": "~6.0",
-    "mocha": "~10.2",
-    "pacote": "~13.6",
-    "standard": "~17.1"
+    "@asciidoctor/core": "^4.0",
+    "@biomejs/biome": "^2.5.5",
+    "rollup": "^4.62.2"
   },
   "peerDependencies": {
-    "@asciidoctor/core": ">=2.2 <4.0"
+    "@asciidoctor/core": ">=4.0 <5.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mogztter/asciidoctor-emoji.git"
+    "url": "https://github.com/ggrossetie/asciidoctor-emoji.git"
   },
   "keywords": [
     "asciidoctor",
@@ -39,13 +42,16 @@
     "javascript",
     "extension"
   ],
-  "author": "Guillaume Grossetie (https://github.com/mogztter)",
+  "author": "Guillaume Grossetie (https://github.com/ggrossetie)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mogztter/asciidoctor-emoji/issues"
+    "url": "https://github.com/ggrossetie/asciidoctor-emoji/issues"
   },
-  "homepage": "https://github.com/mogztter/asciidoctor-emoji#readme",
+  "homepage": "https://github.com/ggrossetie/asciidoctor-emoji#readme",
   "publishConfig": {
     "access": "public"
+  },
+  "volta": {
+    "node": "24.18.0"
   }
 }
