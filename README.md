@@ -152,6 +152,30 @@ Other examples:
 :emoji-pattern: https://emoji-cdn.mqrio.dev/{emoji}?style=google
 ```
 
+### Same emoji, different look
+
+`emoji-pattern` doesn't just change the CDN, it changes the artwork. `grinning` (`1f600`) is one
+of the oldest, most universal emoji — every vendor draws it, and every vendor draws it
+differently. Same short name, same document, four completely different looks just by changing
+one attribute:
+
+| `emoji-pattern` | `emoji:grinning[]` renders as |
+| --- | --- |
+| `.../emoji-datasource-twitter@16.0.0/img/twitter/64/{codepoint}.png` (Twitter) | <img src="https://cdn.jsdelivr.net/npm/emoji-datasource-twitter@16.0.0/img/twitter/64/1f600.png" width="48" height="48" alt="grinning face, Twitter style"> |
+| `.../emoji-datasource-facebook@16.0.0/img/facebook/64/{codepoint}.png` (Facebook) | <img src="https://cdn.jsdelivr.net/npm/emoji-datasource-facebook@16.0.0/img/facebook/64/1f600.png" width="48" height="48" alt="grinning face, Facebook style"> |
+| `.../emoji-datasource-google@16.0.0/img/google/64/{codepoint}.png` (Google) | <img src="https://cdn.jsdelivr.net/npm/emoji-datasource-google@16.0.0/img/google/64/1f600.png" width="48" height="48" alt="grinning face, Google style"> |
+| `https://emoji-cdn.mqrio.dev/{emoji}?style=animated-noto-color-emoji` (Noto, animated) | <img src="https://emoji-cdn.mqrio.dev/%F0%9F%98%80?style=animated-noto-color-emoji" width="48" height="48" alt="grinning face, animated Noto style"> |
+
+That last one is a genuine animated GIF, courtesy of [emoji-cdn](https://github.com/oddmario/emoji-cdn)'s
+`animated-noto-color-emoji` style (see its README for the full list of styles, including
+`joypixels-animations` and `twitter-emoji-stickers`):
+
+```adoc
+:emoji-pattern: https://emoji-cdn.mqrio.dev/{emoji}?style=animated-noto-color-emoji
+
+emoji:grinning[]
+```
+
 ## Rendering emoji as text with a font
 
 Instead of fetching an image, you can render the emoji as its actual Unicode character and let
@@ -201,12 +225,12 @@ The `emoji` inline macro is converted into an `<image>` that points to a remote 
 
 
 ```adoc
-emoji:beetle[]
+emoji:ladybug[]
 ```
 
 ```html
-<span class="image emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1fab2.svg" alt="beetle" width="24px" height="24px"></span>
+<span class="image emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1f41e.svg" alt="ladybug" width="24px" height="24px"></span>
 ```
 
-<span class="image emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1fab2.svg" alt="beetle" width="24px" height="24px"></span>
+<span class="image emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1f41e.svg" alt="ladybug" width="24px" height="24px"></span>
 
