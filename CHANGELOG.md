@@ -23,6 +23,8 @@
 - Switch tests to Node's built-in test runner (`node:test` + `node:assert`)
 - Automate releases from GitHub Actions: bump the version, roll this changelog, tag, publish to npm and create the GitHub release from a `workflow_dispatch` input, including prerelease (`-alpha`/`-beta`/`-rc`) and maintenance-branch npm dist-tag handling
 - Log unresolved emoji through Asciidoctor's own logger (respecting a caller-supplied `logger` option and including the source line when the document is processed with `sourcemap: true`) instead of `console.warn`
+- Document `emoji-pattern` with a side-by-side rendering of `emoji:grinning[]` across the Twitter, Facebook, and Google emoji sets, plus an animated Noto GIF via [emoji-cdn](https://github.com/oddmario/emoji-cdn)'s `animated-noto-color-emoji` style, to show how much a single attribute changes the artwork
+- Swap the `beetle` example in the "How ?" section for `ladybug`
 
 ## v0.5.0 (2023-09-04)
 
