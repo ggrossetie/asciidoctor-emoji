@@ -7,7 +7,7 @@
 - Bump the `@asciidoctor/core` peer dependency to `>=4.0 <5.0` (native JS rewrite, async API)
 - Require Node.js 20 or later
 - Regenerate `src/twemoji-map.js` from `emoji-datasource-twitter` (was hand-maintained from a stale, unmaintained `jollygoodcode/twemoji` YAML file); some emoji short names now resolve to a different, more current codepoint (e.g. `beetle` now points to the emoji introduced in Unicode 13.0, the previous one is available as `ladybug`)
-- Point emoji images at `@discordapp/twemoji` (the actively maintained `jdecked/twemoji` fork, pinned to `16.0.1`) instead of the official `twemoji` npm package, which stopped publishing image assets after `12.0.2` and left `twemoji@latest` silently serving stale, years-old artwork missing every emoji added since Unicode 13
+- Point emoji images at `@discordapp/twemoji` (Discord's actively maintained fork at [discord/twemoji](https://github.com/discord/twemoji), pinned to `16.0.1`) instead of the official `twemoji` npm package, which stopped publishing image assets after `12.0.2` and left `twemoji@latest` silently serving stale, years-old artwork missing every emoji added since Unicode 13
 
 ### Changed
 

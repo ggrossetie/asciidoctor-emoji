@@ -106,7 +106,7 @@ emoji:tada[42px]
 
 ## How ?
 
-This extension is using [Twemoji](https://github.com/jdecked/twemoji), the actively maintained continuation of Twitter's original emoji set.
+This extension is using [Twemoji](https://github.com/discord/twemoji), Discord's actively maintained fork of Twitter's original emoji set.
 The `emoji` inline macro is converted into an `<image>` that points to a remote SVG:
 
 
