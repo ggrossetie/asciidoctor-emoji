@@ -34,3 +34,13 @@ jobs:
         run: npm run build
       - name: Test
         run: npm test
+      - name: Coverage summary
+        if: matrix.os == 'ubuntu-latest' && matrix.node-version == 24
+        run: |
+          {
+            echo '### Coverage'
+            echo
+            echo '```'
+            npm run test:coverage 2>&1 | sed -n '/start of coverage report/,/end of coverage report/p'
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
