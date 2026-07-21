@@ -1,6 +1,6 @@
 # :rocket: Asciidoctor Emoji Extension
 
-[![Build](https://github.com/Mogztter/asciidoctor-emoji/actions/workflows/build.yml/badge.svg)](https://github.com/Mogztter/asciidoctor-emoji/actions/workflows/build.yml)
+[![Build](https://github.com/ggrossetie/asciidoctor-emoji/actions/workflows/build.yml/badge.svg)](https://github.com/ggrossetie/asciidoctor-emoji/actions/workflows/build.yml)
 [![npm version](https://img.shields.io/npm/v/asciidoctor-emoji)](https://www.npmjs.com/package/asciidoctor-emoji)
 
 An extension for [Asciidoctor.js](https://github.com/asciidoctor/asciidoctor.js) that turns `emoji:heart[]` into :heart: !
@@ -13,25 +13,37 @@ Install the dependencies:
 
     $ npm i @asciidoctor/core asciidoctor-emoji
 
-Create a file named `emoji.js` with following content and run it (requires Node.js 20+):
+Requires Node.js 20 or later. Asciidoctor.js's `convert` is asynchronous, so it must be awaited.
+
+Create a file named `emoji.mjs` with following content and run it:
 
 ```javascript
-const asciidoctor = require('@asciidoctor/core')()
-const emoji = require('asciidoctor-emoji')
+import { convert, Extensions } from '@asciidoctor/core'
+import { register } from 'asciidoctor-emoji'
 
 const input = 'I emoji:heart[1x] Asciidoctor.js!'
 
-emoji.register(asciidoctor.Extensions)
-console.log(asciidoctor.convert(input)) // <1>
-
-const registry = asciidoctor.Extensions.create()
-emoji.register(registry)
-console.log(asciidoctor.convert(input, {'extension_registry': registry})) // <2>
+const registry = Extensions.create()
+register(registry)
+console.log(await convert(input, { extension_registry: registry }))
 ```
-<1> Register the extension in the global registry   
-<2> Register the extension in a dedicated registry
 
-This package is published as both ESM and CommonJS, so import Asciidoctor from '@asciidoctor/core' and import * as emoji from 'asciidoctor-emoji' work as well.
+This package is also published as CommonJS. Using `require`:
+
+```javascript
+const { convert, Extensions } = require('@asciidoctor/core')
+const { register } = require('asciidoctor-emoji')
+
+async function main () {
+  const input = 'I emoji:heart[1x] Asciidoctor.js!'
+
+  const registry = Extensions.create()
+  register(registry)
+  console.log(await convert(input, { extension_registry: registry }))
+}
+
+main()
+```
 
 ### Browser
 
@@ -39,32 +51,28 @@ Install the dependencies:
 
     $ npm i @asciidoctor/core asciidoctor-emoji
 
-Create a file named `emoji.html` with the following content and open it in your browser:
+Asciidoctor.js is published as a native ES module, so it must be loaded with `<script type="module">`. Create a file named `emoji.html` with the following content and serve it with a local web server (ES modules aren't loaded from a `file://` URL):
 
 ```html
 <html>
-  <head>
-    <script src="node_modules/@asciidoctor/core/dist/browser/asciidoctor.js"></script>
-    <script src="node_modules/asciidoctor-emoji/dist/browser/asciidoctor-emoji.js"></script>
-  </head>
   <body>
     <div id="content"></div>
-    <script>
-      var input = 'I emoji:heart[1x] Asciidoctor.js!'
+    <script type="module">
+      import { convert, Extensions } from './node_modules/@asciidoctor/core/build/browser/index.js'
+      import { register } from './node_modules/asciidoctor-emoji/src/asciidoctor-emoji.js'
 
-      var asciidoctor = Asciidoctor()
-      var emoji = AsciidoctorEmoji
+      const input = 'I emoji:heart[1x] Asciidoctor.js!'
 
-      const registry = asciidoctor.Extensions.create()
-      emoji.register(registry)
-      var result = asciidoctor.convert(input, {'extension_registry': registry})
+      const registry = Extensions.create()
+      register(registry)
+      const result = await convert(input, { extension_registry: registry })
       document.getElementById('content').innerHTML = result
     </script>
   </body>
 </html>
 ```
-<1> Register the extension in the global registry   
-<2> Register the extension in a dedicated registry
+
+A UMD build is also published at `dist/browser/asciidoctor-emoji.js` (exposing a global `AsciidoctorEmoji`) for bundlers or non-module `<script>` usage.
 
 ## Usage
 
