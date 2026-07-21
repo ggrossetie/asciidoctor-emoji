@@ -88,14 +88,7 @@ function emojiWebfontDocinfoProcessor() {
 }
 
 export function register(registry) {
-  if (typeof registry.register === 'function') {
-    registry.register(function () {
-      this.inlineMacro(emojiInlineMacro)
-      this.docinfoProcessor(emojiWebfontDocinfoProcessor)
-    })
-  } else if (typeof registry.block === 'function') {
-    registry.inlineMacro(emojiInlineMacro)
-    registry.docinfoProcessor(emojiWebfontDocinfoProcessor)
-  }
+  registry.inlineMacro(emojiInlineMacro)
+  registry.docinfoProcessor(emojiWebfontDocinfoProcessor)
   return registry
 }

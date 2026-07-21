@@ -15,6 +15,7 @@
 - Regenerate `src/twemoji-map.js` from `emoji-datasource` (was hand-maintained from a stale, unmaintained `jollygoodcode/twemoji` YAML file); some emoji short names now resolve to a different, more current codepoint (e.g. `beetle` now points to the emoji introduced in Unicode 13.0, the previous one is available as `ladybug`)
 - Point emoji images at `@discordapp/twemoji` (Discord's actively maintained fork at [discord/twemoji](https://github.com/discord/twemoji), pinned to `16.0.1`) instead of the official `twemoji` npm package, which stopped publishing image assets after `12.0.2` and left `twemoji@latest` silently serving stale, years-old artwork missing every emoji added since Unicode 13
 - Resolved emoji now render with `class="image emoji"` (was `class="emoji"`); an unresolved emoji now renders as `<span class="emoji unresolved">emoji:name[] unresolved</span>` instead of `[emoji name not found]`, mirroring Antora's `xref unresolved` convention so both cases can be targeted with CSS
+- Drop the fallback to the pre-4.0 `registry.register(fn)` DSL for registering extensions; `register()` now always calls `registry.inlineMacro()`/`registry.docinfoProcessor()` directly, which is the only shape `@asciidoctor/core` 4.x's `Registry` supports
 
 ### Changed
 
