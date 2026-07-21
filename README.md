@@ -116,6 +116,42 @@ emoji:not-an-emoji[]
 <span class="emoji unresolved">emoji:not-an-emoji[] unresolved</span>
 ```
 
+## Configuring the image source
+
+By default, emoji are rendered from Discord's `@discordapp/twemoji` fork on jsDelivr (see [How ?](#how-) below).
+You can point at a different CDN or emoji set with the `emoji-pattern` document attribute, a URL template
+with a placeholder for the emoji:
+
+* `{codepoint}` — the hyphen-joined, lowercase hex Unicode codepoint(s), e.g. `1f604` or `1f1eb-1f1f7` for `flag-fr`
+* `{CODEPOINT}` — same, but uppercase, e.g. `1F1EB-1F1F7` for `flag-fr` (needed by, e.g., OpenMoji)
+* `{codepoint_underscore}` — same as `{codepoint}`, but underscore-joined, e.g. `1f1eb_1f1f7` for `flag-fr` (needed by, e.g., Google's Noto Emoji CDN)
+* `{emoji}` — the actual emoji character(s), percent-encoded, e.g. `%F0%9F%87%AB%F0%9F%87%B7` for `flag-fr`
+
+```adoc
+:emoji-pattern: https://cdn.jsdelivr.net/npm/emoji-datasource-twitter@16.0.0/img/twitter/64/{codepoint}.png
+
+emoji:tada[]
+```
+
+Other examples:
+
+```adoc
+// Facebook emoji set, served from jsDelivr
+:emoji-pattern: https://cdn.jsdelivr.net/npm/emoji-datasource-facebook@16.0.0/img/facebook/64/{codepoint}.png
+
+// Official Twemoji CDN
+:emoji-pattern: https://twemoji.maxcdn.com/2/svg/{codepoint}.svg
+
+// OpenMoji, served from jsDelivr (requires uppercase codepoints)
+:emoji-pattern: https://cdn.jsdelivr.net/npm/openmoji@16.0.0/color/svg/{CODEPOINT}.svg
+
+// Google's Noto Emoji font, served by Google Fonts (requires underscore-joined codepoints)
+:emoji-pattern: https://fonts.gstatic.com/s/e/notoemoji/latest/{codepoint_underscore}/512.png
+
+// emoji-cdn (https://github.com/oddmario/emoji-cdn), keyed by the raw emoji character
+:emoji-pattern: https://emoji-cdn.mqrio.dev/{emoji}?style=google
+```
+
 ## How ?
 
 This extension is using [Twemoji](https://github.com/discord/twemoji), Discord's actively maintained fork of Twitter's original emoji set.
