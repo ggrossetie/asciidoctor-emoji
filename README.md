@@ -13,7 +13,7 @@ Install the dependencies:
 
     $ npm i @asciidoctor/core asciidoctor-emoji
 
-Create a file named `emoji.js` with following content and run it:
+Create a file named `emoji.js` with following content and run it (requires Node.js 20+):
 
 ```javascript
 const asciidoctor = require('@asciidoctor/core')()
@@ -30,6 +30,8 @@ console.log(asciidoctor.convert(input, {'extension_registry': registry})) // <2>
 ```
 <1> Register the extension in the global registry   
 <2> Register the extension in a dedicated registry
+
+This package is published as both ESM and CommonJS, so import Asciidoctor from '@asciidoctor/core' and import * as emoji from 'asciidoctor-emoji' work as well.
 
 ### Browser
 
