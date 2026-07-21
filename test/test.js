@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
-import { convert, Extensions } from '@asciidoctor/core'
+import { convert, Extensions, MemoryLogger } from '@asciidoctor/core'
 import { register } from '../src/asciidoctor-emoji.js'
 
 describe('Registration', () => {
@@ -34,7 +34,7 @@ describe('Conversion', () => {
       const html = await convert(input, { extension_registry: registry })
       assert.ok(
         html.includes(
-          '<span class="emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1f604.svg" alt="smile" width="24px" height="24px"></span>',
+          '<span class="image emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1f604.svg" alt="smile" width="24px" height="24px"></span>',
         ),
       )
     })
@@ -43,7 +43,24 @@ describe('Conversion', () => {
       const registry = Extensions.create()
       register(registry)
       const html = await convert(input, { extension_registry: registry })
-      assert.ok(html.includes('[emoji ooops not found]'))
+      assert.ok(html.includes('<span class="emoji unresolved">emoji:ooops[] unresolved</span>'))
+    })
+    it('should log a warning with the source location when the emoji does not exist', async () => {
+      const input = 'emoji:ooops[]'
+      const registry = Extensions.create()
+      register(registry)
+      const memoryLogger = MemoryLogger.create()
+      await convert(input, {
+        extension_registry: registry,
+        sourcemap: true,
+        logger: memoryLogger,
+        attributes: { docfile: 'test.adoc' },
+      })
+      const messages = memoryLogger.getMessages()
+      assert.equal(messages.length, 1)
+      assert.equal(messages[0].getSeverity(), 'WARN')
+      assert.equal(messages[0].getText(), 'skipping emoji inline macro, ooops not found')
+      assert.equal(messages[0].getSourceLocation().getLineNumber(), 1)
     })
   })
   it('should convert an existing emoji into an image with the size 2x (34px)', async () => {
@@ -53,7 +70,7 @@ describe('Conversion', () => {
     const html = await convert(input, { extension_registry: registry })
     assert.ok(
       html.includes(
-        '<span class="emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1f385-1f3ff.svg" alt="santa-skin-tone-6" width="34px" height="34px"></span>',
+        '<span class="image emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1f385-1f3ff.svg" alt="santa-skin-tone-6" width="34px" height="34px"></span>',
       ),
     )
   })
@@ -64,7 +81,7 @@ describe('Conversion', () => {
     const html = await convert(input, { extension_registry: registry })
     assert.ok(
       html.includes(
-        '<span class="emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1fab2.svg" alt="beetle" width="68px" height="68px"></span>',
+        '<span class="image emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1fab2.svg" alt="beetle" width="68px" height="68px"></span>',
       ),
     )
   })
@@ -75,7 +92,7 @@ describe('Conversion', () => {
     const html = await convert(input, { extension_registry: registry })
     assert.ok(
       html.includes(
-        '<span class="emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1f427.svg" alt="penguin" width="42px" height="42px"></span>',
+        '<span class="image emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1f427.svg" alt="penguin" width="42px" height="42px"></span>',
       ),
     )
   })
@@ -86,7 +103,7 @@ describe('Conversion', () => {
     const html = await convert(input, { extension_registry: registry })
     assert.ok(
       html.includes(
-        '<span class="emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1f951.svg" alt="avocado" width="24px" height="24px"></span>',
+        '<span class="image emoji"><img src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1f951.svg" alt="avocado" width="24px" height="24px"></span>',
       ),
     )
   })
@@ -111,7 +128,7 @@ describe('Conversion', () => {
     })
     assert.ok(
       html.includes(
-        '<span class="emoji"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PGNpcmNsZSBmaWxsPSIjMzEzNzNEIiBjeD0iMTgiIGN5PSIxOCIgcj0iMTgiLz48L3N2Zz4=" alt="black_circle" width="24px" height="24px"></span>',
+        '<span class="image emoji"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PGNpcmNsZSBmaWxsPSIjMzEzNzNEIiBjeD0iMTgiIGN5PSIxOCIgcj0iMTgiLz48L3N2Zz4=" alt="black_circle" width="24px" height="24px"></span>',
       ),
     )
   })
