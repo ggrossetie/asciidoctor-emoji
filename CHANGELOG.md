@@ -7,6 +7,8 @@
 - Add an `emoji-pattern` document attribute to configure the image URL template, so any CDN or emoji set can be used instead of the bundled Twemoji default. Supports `{codepoint}`/`{CODEPOINT}`/`{codepoint_underscore}` (hyphen- or underscore-joined hex Unicode codepoint, lower or upper case) and `{emoji}` (percent-encoded emoji character) placeholders, covering CDNs such as the `emoji-datasource-*` packages on jsDelivr (Twitter, Facebook, Apple, Google sets), the official Twemoji CDN, OpenMoji, Google's Noto Emoji font, and [emoji-cdn](https://github.com/oddmario/emoji-cdn)
 - Add an `emojis: font` document attribute, mirroring Asciidoctor's own `icons: font`, that renders the actual Unicode emoji character (e.g. `<span class="emoji" title="heart" style="font-size:24px">❤</span>`) instead of an image, relying on the font available to the reader instead of fetching artwork from a CDN
 - Add an `emoji-webfont` document attribute that, when `emojis: font` is set, injects a `<link rel="stylesheet">` for the given URL into the `<head>` of a standalone document, for pointing at a webfont (e.g. Twemoji Mozilla, Noto Color Emoji) for consistent cross-platform rendering; opt-in only, no webfont is loaded by default
+- Add a `test:coverage` script (`node --test --experimental-test-coverage`) to report test coverage using Node's built-in test runner
+- Publish the coverage report to the GitHub Actions job summary (visible from a PR's checks) on the `ubuntu-latest`/Node 24 build leg
 
 ### Breaking Changes
 
