@@ -117,6 +117,79 @@ describe('Conversion', () => {
     assert.ok(primary.includes('src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1f44d.svg"'))
     assert.ok(alias.includes('src="https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/1f44d.svg"'))
   })
+  it('should use the emoji-pattern attribute with a {codepoint} placeholder', async () => {
+    const input = 'emoji:beetle[]'
+    const registry = Extensions.create()
+    register(registry)
+    const html = await convert(input, {
+      extension_registry: registry,
+      attributes: {
+        'emoji-pattern':
+          'https://cdn.jsdelivr.net/npm/emoji-datasource-facebook@16.0.0/img/facebook/64/{codepoint}.png',
+      },
+    })
+    assert.ok(
+      html.includes(
+        '<span class="image emoji"><img src="https://cdn.jsdelivr.net/npm/emoji-datasource-facebook@16.0.0/img/facebook/64/1fab2.png" alt="beetle" width="24px" height="24px"></span>',
+      ),
+    )
+  })
+  it('should use the emoji-pattern attribute with an {emoji} placeholder', async () => {
+    const input = 'emoji:tada[]'
+    const registry = Extensions.create()
+    register(registry)
+    const html = await convert(input, {
+      extension_registry: registry,
+      attributes: { 'emoji-pattern': 'https://emoji-cdn.mqrio.dev/{emoji}?style=google' },
+    })
+    assert.ok(
+      html.includes(
+        '<span class="image emoji"><img src="https://emoji-cdn.mqrio.dev/%F0%9F%8E%89?style=google" alt="tada" width="24px" height="24px"></span>',
+      ),
+    )
+  })
+  it('should use the emoji-pattern attribute with a {CODEPOINT} placeholder', async () => {
+    const input = 'emoji:family_adult_child[]'
+    const registry = Extensions.create()
+    register(registry)
+    const html = await convert(input, {
+      extension_registry: registry,
+      attributes: { 'emoji-pattern': 'https://cdn.jsdelivr.net/npm/openmoji@16.0.0/color/svg/{CODEPOINT}.svg' },
+    })
+    assert.ok(
+      html.includes(
+        '<span class="image emoji"><img src="https://cdn.jsdelivr.net/npm/openmoji@16.0.0/color/svg/1F9D1-200D-1F9D2.svg" alt="family_adult_child" width="24px" height="24px"></span>',
+      ),
+    )
+  })
+  it('should use the emoji-pattern attribute with a {codepoint_underscore} placeholder', async () => {
+    const input = 'emoji:flag-fr[]'
+    const registry = Extensions.create()
+    register(registry)
+    const html = await convert(input, {
+      extension_registry: registry,
+      attributes: { 'emoji-pattern': 'https://fonts.gstatic.com/s/e/notoemoji/latest/{codepoint_underscore}/512.png' },
+    })
+    assert.ok(
+      html.includes(
+        '<span class="image emoji"><img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f1eb_1f1f7/512.png" alt="flag-fr" width="24px" height="24px"></span>',
+      ),
+    )
+  })
+  it('should resolve a multi-codepoint emoji to its {emoji} placeholder', async () => {
+    const input = 'emoji:flag-fr[]'
+    const registry = Extensions.create()
+    register(registry)
+    const html = await convert(input, {
+      extension_registry: registry,
+      attributes: { 'emoji-pattern': 'https://emoji-cdn.mqrio.dev/{emoji}?style=google' },
+    })
+    assert.ok(
+      html.includes(
+        '<span class="image emoji"><img src="https://emoji-cdn.mqrio.dev/%F0%9F%87%AB%F0%9F%87%B7?style=google" alt="flag-fr" width="24px" height="24px"></span>',
+      ),
+    )
+  })
   it('should convert an existing emoji into an inline image', async () => {
     const input = 'emoji:black_circle[]'
     const registry = Extensions.create()
