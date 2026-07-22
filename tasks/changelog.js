@@ -26,7 +26,7 @@ export function rollUnreleased (content, version, releaseDate) {
 // Extracts the "## v<version> (date)" section content.
 export function extractReleaseNotes (content, version) {
   const escapedVersion = version.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-  const headerRegex = new RegExp(`^## v${escapedVersion} \\([^)]+\\)\\n([\\s\\S]*?)(?=\\n## |$)`, 'm')
+  const headerRegex = new RegExp(`^## v${escapedVersion} \\([^)]+\\)\\n([\\s\\S]*?)(?=\\n## |(?![\\s\\S]))`, 'm')
   const match = content.match(headerRegex)
   if (!match) {
     throw new Error(`Section "## v${version}" not found in CHANGELOG.md`)

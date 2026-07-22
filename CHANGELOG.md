@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Fixed
+
+- Fix `tasks/changelog.js notes` extracting an empty string for a release section immediately followed by a blank line; the lookahead ending the capture used `$`, which under the regex's `m` flag also matches end-of-line, not just end-of-string
+
 ## v1.0.0-beta.1 (2026-07-22)
 
 ### Added
