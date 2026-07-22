@@ -24,10 +24,7 @@ function emojiInlineMacro() {
   const defaultPattern = 'https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg/{codepoint}.svg'
 
   this.process((parent, target, attrs) => {
-    // @asciidoctor/core's inline macro substitution doesn't honor positionalAttributes()
-    // (it reads a differently-cased config key), so the attrlist ends up in attrs.text
-    // instead of attrs.size. Fall back to it until that's fixed upstream.
-    const sizeAttr = attrs.size ?? attrs.text
+    const sizeAttr = attrs.size
     let size
     if (sizeAttr?.trim().endsWith('px')) {
       size = sizeAttr
@@ -63,11 +60,7 @@ function emojiInlineMacro() {
         },
       })
     }
-    // Workaround: in @asciidoctor/core 4.0.4, doc.getLogger() ignores a per-call `logger` option
-    // passed to convert()/load() once outside load()'s internal async-local-storage scope (i.e.
-    // during doc.convert(), where this macro runs), while the `logger` property getter respects
-    // it correctly. Use `doc.logger` until that inconsistency is fixed upstream.
-    doc.logger.warn(
+    doc.getLogger().warn(
       doc.messageWithContext(`skipping emoji inline macro, ${target} not found`, {
         source_location: parent.getSourceLocation?.() ?? null,
       }),
