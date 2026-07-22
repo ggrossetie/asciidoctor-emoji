@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v1.0.0-beta.1 (2026-07-22)
+
 ### Added
 
 - Add an `emoji-pattern` document attribute to configure the image URL template, so any CDN or emoji set can be used instead of the bundled Twemoji default. Supports `{codepoint}`/`{CODEPOINT}`/`{codepoint_underscore}` (hyphen- or underscore-joined hex Unicode codepoint, lower or upper case) and `{emoji}` (percent-encoded emoji character) placeholders, covering CDNs such as the `emoji-datasource-*` packages on jsDelivr (Twitter, Facebook, Apple, Google sets), the official Twemoji CDN, OpenMoji, Google's Noto Emoji font, and [emoji-cdn](https://github.com/oddmario/emoji-cdn)
