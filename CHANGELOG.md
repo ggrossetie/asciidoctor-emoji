@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+1.0.0 rolls up every change from `1.0.0-beta.1` below. It's a major release because it's only compatible with `@asciidoctor/core` `>=4.0 <5.0`, and it adds Unicode 16 emoji support, an `emoji-pattern` attribute to configure the image provider via a URL template, and an `emojis: font` attribute to render emoji as text instead of images.
+
 ### Fixed
 
 - Fix `tasks/changelog.js notes` extracting an empty string for a release section immediately followed by a blank line; the lookahead ending the capture used `$`, which under the regex's `m` flag also matches end-of-line, not just end-of-string
