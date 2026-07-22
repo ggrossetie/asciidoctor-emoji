@@ -1,6 +1,6 @@
 {
   "name": "asciidoctor-emoji",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0",
   "description": "Asciidoctor Emoji Extension",
   "type": "module",
   "main": "./dist/asciidoctor-emoji.cjs",

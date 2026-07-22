@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v1.0.0 (2026-07-22)
+
 1.0.0 rolls up every change from `1.0.0-beta.1` below. It's a major release because it's only compatible with `@asciidoctor/core` `>=4.0 <5.0`, and it adds Unicode 16 emoji support, an `emoji-pattern` attribute to configure the image provider via a URL template, and an `emojis: font` attribute to render emoji as text instead of images.
 
 ### Fixed
